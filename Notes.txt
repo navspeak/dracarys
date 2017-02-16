@@ -1,0 +1,64 @@
+Node version 4.2.x LTS (long time support)
+REPL 
+===
+'use strict' allow use of ECMA6 
+var produces function scope whereas let uses block level
+==
+req object:
+req.url = /api/prods?id=455&color=Red
+req.method = GET
+req.headers = { 
+                host: 'localhost:3000',
+                connection: 'keep-alive',
+               'cache-control':'max-age=0',
+                accept:'text/html'
+                'upgrade-insecure-requests':'1'
+               }
+===
+const url = require('url')
+baseURL = url.parse(req.url, true)
+with true the query parameter will be json
+so if I have http://localhost:3000/api/getinfo?color=red&color=blue
+Url {
+search: '?color=red&color=blue',
+query: {color : ['red', 'green']
+..
+}
+===
+Java Script object values can be functions
+===
+http://localhost:3000/api/getinfo?prod=iii&color=red&color=green
+{"prod":"iii","color":["red","green"]}
+==
+When data flows, Node fires an event which we can intercept
+==
+NodeJS at its core:
+1. Libuv impl is responsible for all the I/O
+2. V8's Event's Loop fires Events 
+3. These events are intercepted by Event Listener objects where we write our function
+
+1. http.createServer returns an instance of http.server
+2. http.server is an event emitter 
+3. when data flows in such as HTTP request from a user, http.server emits an http.request event
+4. http.request event contains req and res objects
+5. The Req object here is a part of http.IncomingMessage(Readable) stream
+6. The Res object here is a part of http.ServerMessage(Writable) stream
+
+Node's C++ core talks to the processor in machine language.
+In Node, V8 interfaces with libuv to interact with hardware likes drives (not possible when v8 works in chrome)
+==
+__dirname = local to every module you import
+process.cwd() = cwd of the calling process
+
+fs codes F_OK (accessible or not), R_OK, W_OK, X_OK
+===
+Semantic Versioning
+3.1.1
+Major.Minor.Patch
+^3.1.0 = allow most recent minor version (3.x, 3)
+~3.1.0 = only patch updates
+==
+Node modules are regenerated if package.json is correct. Just type npm install.
+
+
+
